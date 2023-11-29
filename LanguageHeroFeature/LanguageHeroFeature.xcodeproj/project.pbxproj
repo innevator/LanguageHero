@@ -10,6 +10,8 @@
 		FE031E972B16EDF30070BF14 /* LanguageHeroFeature.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE031E8E2B16EDF30070BF14 /* LanguageHeroFeature.framework */; };
 		FE031E9C2B16EDF30070BF14 /* LanguageHeroFeatureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE031E9B2B16EDF30070BF14 /* LanguageHeroFeatureTests.swift */; };
 		FE031E9D2B16EDF30070BF14 /* LanguageHeroFeature.h in Headers */ = {isa = PBXBuildFile; fileRef = FE031E912B16EDF30070BF14 /* LanguageHeroFeature.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FE031EA72B1786810070BF14 /* GameProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE031EA62B1786810070BF14 /* GameProcessor.swift */; };
+		FE031EA92B1786940070BF14 /* Talk.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE031EA82B1786940070BF14 /* Talk.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +29,8 @@
 		FE031E912B16EDF30070BF14 /* LanguageHeroFeature.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LanguageHeroFeature.h; sourceTree = "<group>"; };
 		FE031E962B16EDF30070BF14 /* LanguageHeroFeatureTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LanguageHeroFeatureTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE031E9B2B16EDF30070BF14 /* LanguageHeroFeatureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageHeroFeatureTests.swift; sourceTree = "<group>"; };
+		FE031EA62B1786810070BF14 /* GameProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameProcessor.swift; sourceTree = "<group>"; };
+		FE031EA82B1786940070BF14 /* Talk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Talk.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +74,8 @@
 			isa = PBXGroup;
 			children = (
 				FE031E912B16EDF30070BF14 /* LanguageHeroFeature.h */,
+				FE031EA62B1786810070BF14 /* GameProcessor.swift */,
+				FE031EA82B1786940070BF14 /* Talk.swift */,
 			);
 			path = LanguageHeroFeature;
 			sourceTree = "<group>";
@@ -144,6 +150,7 @@
 				TargetAttributes = {
 					FE031E8D2B16EDF30070BF14 = {
 						CreatedOnToolsVersion = 15.0.1;
+						LastSwiftMigration = 1500;
 					};
 					FE031E952B16EDF30070BF14 = {
 						CreatedOnToolsVersion = 15.0.1;
@@ -191,6 +198,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE031EA72B1786810070BF14 /* GameProcessor.swift in Sources */,
+				FE031EA92B1786940070BF14 /* Talk.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,6 +349,7 @@
 		FE031EA12B16EDF30070BF14 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -364,6 +374,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -371,6 +382,7 @@
 		FE031EA22B16EDF30070BF14 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -402,6 +414,7 @@
 		FE031EA42B16EDF30070BF14 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2S859NQ39F;
@@ -417,6 +430,7 @@
 		FE031EA52B16EDF30070BF14 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2S859NQ39F;
