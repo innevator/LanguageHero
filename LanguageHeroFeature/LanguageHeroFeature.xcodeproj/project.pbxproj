@@ -12,6 +12,12 @@
 		FE031E9D2B16EDF30070BF14 /* LanguageHeroFeature.h in Headers */ = {isa = PBXBuildFile; fileRef = FE031E912B16EDF30070BF14 /* LanguageHeroFeature.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FE031EA72B1786810070BF14 /* GameProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE031EA62B1786810070BF14 /* GameProcessor.swift */; };
 		FE031EA92B1786940070BF14 /* Talk.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE031EA82B1786940070BF14 /* Talk.swift */; };
+		FE031F1F2B17904E0070BF14 /* LanguageHeroApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE031F1E2B17904E0070BF14 /* LanguageHeroApp.swift */; };
+		FE031F212B17904E0070BF14 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE031F202B17904E0070BF14 /* ContentView.swift */; };
+		FE031F232B17904F0070BF14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE031F222B17904F0070BF14 /* Assets.xcassets */; };
+		FE031F262B17904F0070BF14 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE031F252B17904F0070BF14 /* Preview Assets.xcassets */; };
+		FE031F2B2B1790620070BF14 /* LanguageHeroFeature.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE031E8E2B16EDF30070BF14 /* LanguageHeroFeature.framework */; };
+		FE031F2C2B1790620070BF14 /* LanguageHeroFeature.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FE031E8E2B16EDF30070BF14 /* LanguageHeroFeature.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -22,7 +28,28 @@
 			remoteGlobalIDString = FE031E8D2B16EDF30070BF14;
 			remoteInfo = LanguageHeroFeature;
 		};
+		FE031F2D2B1790620070BF14 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FE031E852B16EDF30070BF14 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FE031E8D2B16EDF30070BF14;
+			remoteInfo = LanguageHeroFeature;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FE031F2F2B1790620070BF14 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				FE031F2C2B1790620070BF14 /* LanguageHeroFeature.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		FE031E8E2B16EDF30070BF14 /* LanguageHeroFeature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LanguageHeroFeature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -31,6 +58,12 @@
 		FE031E9B2B16EDF30070BF14 /* LanguageHeroFeatureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageHeroFeatureTests.swift; sourceTree = "<group>"; };
 		FE031EA62B1786810070BF14 /* GameProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameProcessor.swift; sourceTree = "<group>"; };
 		FE031EA82B1786940070BF14 /* Talk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Talk.swift; sourceTree = "<group>"; };
+		FE031F1C2B17904E0070BF14 /* LanguageHeroApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LanguageHeroApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE031F1E2B17904E0070BF14 /* LanguageHeroApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageHeroApp.swift; sourceTree = "<group>"; };
+		FE031F202B17904E0070BF14 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		FE031F222B17904F0070BF14 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FE031F252B17904F0070BF14 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		FE031F302B17935A0070BF14 /* LanguageHeroFeature.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = LanguageHeroFeature.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,15 +82,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FE031F192B17904E0070BF14 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE031F2B2B1790620070BF14 /* LanguageHeroFeature.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		FE031E842B16EDF30070BF14 = {
 			isa = PBXGroup;
 			children = (
+				FE031F302B17935A0070BF14 /* LanguageHeroFeature.xctestplan */,
 				FE031E902B16EDF30070BF14 /* LanguageHeroFeature */,
 				FE031E9A2B16EDF30070BF14 /* LanguageHeroFeatureTests */,
+				FE031F1D2B17904E0070BF14 /* LanguageHeroApp */,
 				FE031E8F2B16EDF30070BF14 /* Products */,
+				FE031F2A2B1790620070BF14 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -66,6 +110,7 @@
 			children = (
 				FE031E8E2B16EDF30070BF14 /* LanguageHeroFeature.framework */,
 				FE031E962B16EDF30070BF14 /* LanguageHeroFeatureTests.xctest */,
+				FE031F1C2B17904E0070BF14 /* LanguageHeroApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -86,6 +131,32 @@
 				FE031E9B2B16EDF30070BF14 /* LanguageHeroFeatureTests.swift */,
 			);
 			path = LanguageHeroFeatureTests;
+			sourceTree = "<group>";
+		};
+		FE031F1D2B17904E0070BF14 /* LanguageHeroApp */ = {
+			isa = PBXGroup;
+			children = (
+				FE031F1E2B17904E0070BF14 /* LanguageHeroApp.swift */,
+				FE031F202B17904E0070BF14 /* ContentView.swift */,
+				FE031F222B17904F0070BF14 /* Assets.xcassets */,
+				FE031F242B17904F0070BF14 /* Preview Content */,
+			);
+			path = LanguageHeroApp;
+			sourceTree = "<group>";
+		};
+		FE031F242B17904F0070BF14 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				FE031F252B17904F0070BF14 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		FE031F2A2B1790620070BF14 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,6 +209,25 @@
 			productReference = FE031E962B16EDF30070BF14 /* LanguageHeroFeatureTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		FE031F1B2B17904E0070BF14 /* LanguageHeroApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FE031F292B17904F0070BF14 /* Build configuration list for PBXNativeTarget "LanguageHeroApp" */;
+			buildPhases = (
+				FE031F182B17904E0070BF14 /* Sources */,
+				FE031F192B17904E0070BF14 /* Frameworks */,
+				FE031F1A2B17904E0070BF14 /* Resources */,
+				FE031F2F2B1790620070BF14 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FE031F2E2B1790620070BF14 /* PBXTargetDependency */,
+			);
+			name = LanguageHeroApp;
+			productName = LanguageHeroApp;
+			productReference = FE031F1C2B17904E0070BF14 /* LanguageHeroApp.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -153,6 +243,9 @@
 						LastSwiftMigration = 1500;
 					};
 					FE031E952B16EDF30070BF14 = {
+						CreatedOnToolsVersion = 15.0.1;
+					};
+					FE031F1B2B17904E0070BF14 = {
 						CreatedOnToolsVersion = 15.0.1;
 					};
 				};
@@ -172,6 +265,7 @@
 			targets = (
 				FE031E8D2B16EDF30070BF14 /* LanguageHeroFeature */,
 				FE031E952B16EDF30070BF14 /* LanguageHeroFeatureTests */,
+				FE031F1B2B17904E0070BF14 /* LanguageHeroApp */,
 			);
 		};
 /* End PBXProject section */
@@ -188,6 +282,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE031F1A2B17904E0070BF14 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE031F262B17904F0070BF14 /* Preview Assets.xcassets in Resources */,
+				FE031F232B17904F0070BF14 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,6 +314,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FE031F182B17904E0070BF14 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE031F212B17904E0070BF14 /* ContentView.swift in Sources */,
+				FE031F1F2B17904E0070BF14 /* LanguageHeroApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -218,6 +330,11 @@
 			isa = PBXTargetDependency;
 			target = FE031E8D2B16EDF30070BF14 /* LanguageHeroFeature */;
 			targetProxy = FE031E982B16EDF30070BF14 /* PBXContainerItemProxy */;
+		};
+		FE031F2E2B1790620070BF14 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FE031E8D2B16EDF30070BF14 /* LanguageHeroFeature */;
+			targetProxy = FE031F2D2B1790620070BF14 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -449,6 +566,67 @@
 			};
 			name = Release;
 		};
+		FE031F272B17904F0070BF14 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"LanguageHeroApp/Preview Content\"";
+				DEVELOPMENT_TEAM = UAYY3HH9CT;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = tw.com.qmontech.LanguageHeroApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FE031F282B17904F0070BF14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"LanguageHeroApp/Preview Content\"";
+				DEVELOPMENT_TEAM = UAYY3HH9CT;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = tw.com.qmontech.LanguageHeroApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -475,6 +653,15 @@
 			buildConfigurations = (
 				FE031EA42B16EDF30070BF14 /* Debug */,
 				FE031EA52B16EDF30070BF14 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FE031F292B17904F0070BF14 /* Build configuration list for PBXNativeTarget "LanguageHeroApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE031F272B17904F0070BF14 /* Debug */,
+				FE031F282B17904F0070BF14 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
