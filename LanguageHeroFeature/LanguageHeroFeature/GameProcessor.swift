@@ -7,8 +7,8 @@
 
 import Foundation
 
-public class GameProcessor {
-    public private(set) var score: UInt = 0
+public class GameProcessor: ObservableObject {
+    @Published public private(set) var score: UInt = 0
     public private(set) var talks: [Talk] = []
     private var currentTalkIndex: Int = 0
     public private(set) var isOver: Bool = false
