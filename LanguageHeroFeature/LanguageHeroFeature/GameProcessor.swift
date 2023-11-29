@@ -23,7 +23,7 @@ public class GameProcessor: ObservableObject {
     }
     
     public func execute(input: String) {
-        if input == currentTalk?.value {
+        if !isOver, input == currentTalk?.value {
             score += 1
             goNextTalk()
         }
