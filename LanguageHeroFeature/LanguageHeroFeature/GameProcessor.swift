@@ -7,22 +7,22 @@
 
 import Foundation
 
-class GameProcessor {
-    private(set) var score: UInt = 0
-    private(set) var talks: [Talk] = []
+public class GameProcessor {
+    public private(set) var score: UInt = 0
+    public private(set) var talks: [Talk] = []
     private var currentTalkIndex: Int = 0
-    private(set) var isOver: Bool = false
+    public private(set) var isOver: Bool = false
     
-    var currentTalk: Talk? {
+    public var currentTalk: Talk? {
         if talks.count == 0 { return nil }
         return talks.count > currentTalkIndex ? talks[currentTalkIndex] : talks[currentTalkIndex - 1]
     }
     
-    init(talks: [Talk]) {
+    public init(talks: [Talk]) {
         self.talks = talks
     }
     
-    func execute(input: String) {
+    public func execute(input: String) {
         if input == currentTalk?.value {
             score += 1
             goNextTalk()

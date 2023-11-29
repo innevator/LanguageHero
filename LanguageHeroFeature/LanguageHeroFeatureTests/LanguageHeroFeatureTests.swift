@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import LanguageHeroFeature
+import LanguageHeroFeature
 
 final class LanguageHeroFeatureTests: XCTestCase {
     func test_initialize() {

@@ -7,10 +7,14 @@
 
 import Foundation
 
-struct Talk: Equatable {
-    let value: String
+public struct Talk: Equatable {
+    public let value: String
     
-    static func == (lhs: Self, rhs: Self) -> Bool {
+    public init(value: String) {
+        self.value = value
+    }
+    
+    public static func == (lhs: Self, rhs: Self) -> Bool {
         return lhs.value == rhs.value
     }
 }
