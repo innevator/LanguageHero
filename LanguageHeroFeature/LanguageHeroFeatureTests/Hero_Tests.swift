@@ -23,8 +23,8 @@ final class Hero_Tests: XCTestCase {
         let sut = Hero()
         let monster = Monster()
         
-        let attackedMonster = sut.attack(monster)
+        sut.attack(monster)
         
-        XCTAssertEqual(attackedMonster.hp, monster.hp - sut.attack)
+        XCTAssertEqual(monster.hp, monster.maxHp - sut.attack)
     }
 }

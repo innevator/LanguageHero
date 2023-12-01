@@ -28,9 +28,7 @@ public class Hero {
         self.experience = experience
     }
     
-    public func attack(_ monster: Monster) -> Monster {
-        var _monster = monster
-        _monster.beAttacked(by: self)
-        return _monster
+    public func attack(_ monster: Monster) {
+        monster.beAttacked(by: self)
     }
 }

@@ -93,13 +93,13 @@ final class LanguageHeroFeatureTests: XCTestCase {
         sut.execute(input: input1)
         
         XCTAssertEqual(sut.isOver, true)
-        XCTAssertEqual(sut.attackingMonster.hp, 0)
+        XCTAssertEqual(sut.monster.hp, 0)
         XCTAssertEqual(sut.currentTalk?.value, talk2.value)
         
         sut.restart()
         
         XCTAssertEqual(sut.isOver, false)
-        XCTAssertEqual(sut.attackingMonster.hp, monster.hp)
+        XCTAssertEqual(sut.monster.hp, monster.hp)
         XCTAssertEqual(sut.score, 0)
         XCTAssertEqual(sut.currentTalk?.value, talk1.value)
         
