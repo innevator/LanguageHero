@@ -24,7 +24,7 @@ final class LanguageHeroFeatureTests: XCTestCase {
         
         sut.execute(input: input)
         
-        XCTAssertEqual(sut.score, 2.0)
+        XCTAssertEqual(sut.score, 40.0)
     }
     
     func test_score_fail() {
@@ -34,7 +34,7 @@ final class LanguageHeroFeatureTests: XCTestCase {
         
         sut.execute(input: input)
         
-        XCTAssertEqual(sut.score, 1.5)
+        XCTAssertEqual(sut.score, 30.0)
     }
     
     func test_changeToNextTalk() {
@@ -104,6 +104,6 @@ final class LanguageHeroFeatureTests: XCTestCase {
     
     // MARK: - Helper
     private func makeSUT(talks: [Talk]) -> GameProcessor {
-        return GameProcessor(talks: talks)
+        return GameProcessor(talks: talks, hero: Hero())
     }
 }
