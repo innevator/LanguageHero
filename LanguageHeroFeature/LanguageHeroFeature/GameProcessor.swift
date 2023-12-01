@@ -53,11 +53,16 @@ public class GameProcessor: ObservableObject {
         if monster.hp <= 0 {
             isOver = true
         }
+        
+        if hero.hp <= 0 {
+            isOver = true
+        }
     }
     
     public func restart() {
         isOver = false
         monster.reset()
+        hero.reset()
         score = 0
         currentTalkIndex = 0
         damageCalculator.reset()
@@ -68,6 +73,10 @@ public class GameProcessor: ObservableObject {
             self.monsterAttackCountDownTimer = Timer.scheduledTimer(withTimeInterval: self.monster.countDownAttackSecond, repeats: true) { [weak self] _ in
                 guard let self = self else { return }
                 self.monster.attack(self.hero)
+                
+                if self.hero.hp <= 0 {
+                    isOver = true
+                }
             }
             self.monsterAttackCountDownTimer?.fire()
         }

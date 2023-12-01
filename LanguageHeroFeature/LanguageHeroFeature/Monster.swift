@@ -25,7 +25,7 @@ public class Monster {
     }
     
     public func attack(_ hero: Hero) {
-        hero.hp -= self.attack
+        hero.beAttacked(by: self)
     }
     
     public func reset() {
