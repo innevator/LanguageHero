@@ -53,5 +53,6 @@ public class GameProcessor: ObservableObject {
         isOver = false
         attackingMonster = monster
         score = 0
+        currentTalkIndex = 0
     }
 }
