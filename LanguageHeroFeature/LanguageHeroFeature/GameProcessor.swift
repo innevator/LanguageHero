@@ -9,9 +9,9 @@ import Foundation
 
 public class GameProcessor: ObservableObject {
     @Published public private(set) var score: Double = 0
+    @Published public private(set) var isOver: Bool = false
     public let talks: [Talk]
     private var currentTalkIndex: Int = 0
-    public private(set) var isOver: Bool = false
     private let damageCalculator: DamageCalculator = DamageCalculator()
     private let hero: Hero
     private let monster: Monster
@@ -52,5 +52,6 @@ public class GameProcessor: ObservableObject {
     public func restart() {
         isOver = false
         attackingMonster = monster
+        score = 0
     }
 }

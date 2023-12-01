@@ -95,6 +95,7 @@ final class LanguageHeroFeatureTests: XCTestCase {
         
         XCTAssertEqual(sut.isOver, false)
         XCTAssertEqual(sut.attackingMonster.hp, monster.hp)
+        XCTAssertEqual(sut.score, 0)
     }
     
     // MARK: - Helper
