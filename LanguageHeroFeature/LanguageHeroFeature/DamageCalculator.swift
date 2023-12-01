@@ -8,10 +8,12 @@
 import Foundation
 
 public class DamageCalculator {
+    public static let initialRate: Double = 1
+    
     public private(set) var rate: Double
     public private(set) var totalDamage: Double
     
-    public init(rate: Double = 1, totalDamage: Double = 0) {
+    public init(rate: Double = DamageCalculator.initialRate, totalDamage: Double = 0) {
         self.rate = rate
         self.totalDamage = totalDamage
     }
@@ -42,5 +44,9 @@ public class DamageCalculator {
         }
         
         return self.rate
+    }
+    
+    public func reset() {
+        self.rate = DamageCalculator.initialRate
     }
 }

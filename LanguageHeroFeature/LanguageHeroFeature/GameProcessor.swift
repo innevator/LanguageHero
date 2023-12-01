@@ -14,7 +14,7 @@ public class GameProcessor: ObservableObject {
     private var currentTalkIndex: Int = 0
     private let damageCalculator: DamageCalculator = DamageCalculator()
     private let hero: Hero
-    private let monster: Monster
+    public let monster: Monster
     public private(set) var attackingMonster: Monster
     
     public var currentTalk: Talk? {
@@ -54,5 +54,6 @@ public class GameProcessor: ObservableObject {
         attackingMonster = monster
         score = 0
         currentTalkIndex = 0
+        damageCalculator.reset()
     }
 }
