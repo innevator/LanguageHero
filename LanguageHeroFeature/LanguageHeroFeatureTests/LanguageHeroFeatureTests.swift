@@ -80,6 +80,23 @@ final class LanguageHeroFeatureTests: XCTestCase {
         XCTAssertEqual(sut.isOver, true)
     }
     
+    func test_restart() {
+        let input1 = "input1"
+        let talk1 = Talk(value: input1)
+        let monster = Monster(hp: 30)
+        let sut = makeSUT(talks: [talk1], hero: Hero(attack: 30), monster: monster)
+        
+        sut.execute(input: input1)
+        
+        XCTAssertEqual(sut.isOver, true)
+        XCTAssertEqual(sut.attackingMonster.hp, 0)
+        
+        sut.restart()
+        
+        XCTAssertEqual(sut.isOver, false)
+        XCTAssertEqual(sut.attackingMonster.hp, monster.hp)
+    }
+    
     // MARK: - Helper
     private func makeSUT(
         talks: [Talk],
