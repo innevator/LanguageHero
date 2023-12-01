@@ -22,6 +22,7 @@
 		FE6334EE2B1A26BA0096C3F6 /* DamageCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6334ED2B1A26BA0096C3F6 /* DamageCalculator.swift */; };
 		FE6334F02B1A2D3A0096C3F6 /* Hero_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6334EF2B1A2D3A0096C3F6 /* Hero_Tests.swift */; };
 		FE6334F22B1A2F430096C3F6 /* Hero.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6334F12B1A2F430096C3F6 /* Hero.swift */; };
+		FE6334F42B1A363A0096C3F6 /* Monster.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6334F32B1A363A0096C3F6 /* Monster.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		FE6334ED2B1A26BA0096C3F6 /* DamageCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DamageCalculator.swift; sourceTree = "<group>"; };
 		FE6334EF2B1A2D3A0096C3F6 /* Hero_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hero_Tests.swift; sourceTree = "<group>"; };
 		FE6334F12B1A2F430096C3F6 /* Hero.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hero.swift; sourceTree = "<group>"; };
+		FE6334F32B1A363A0096C3F6 /* Monster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monster.swift; sourceTree = "<group>"; };
 		FED66E7E2B19D7A2008DBC20 /* DamageCalculator_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DamageCalculator_Tests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -131,6 +133,7 @@
 				FE031EA82B1786940070BF14 /* Talk.swift */,
 				FE6334ED2B1A26BA0096C3F6 /* DamageCalculator.swift */,
 				FE6334F12B1A2F430096C3F6 /* Hero.swift */,
+				FE6334F32B1A363A0096C3F6 /* Monster.swift */,
 			);
 			path = LanguageHeroFeature;
 			sourceTree = "<group>";
@@ -313,6 +316,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE6334F42B1A363A0096C3F6 /* Monster.swift in Sources */,
 				FE031EA72B1786810070BF14 /* GameProcessor.swift in Sources */,
 				FE031EA92B1786940070BF14 /* Talk.swift in Sources */,
 				FE6334EE2B1A26BA0096C3F6 /* DamageCalculator.swift in Sources */,

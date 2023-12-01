@@ -18,4 +18,13 @@ final class Hero_Tests: XCTestCase {
         XCTAssertEqual(sut.magicAttack, 20)
         XCTAssertEqual(sut.experience, 0)
     }
+    
+    func test_HeroAttackMonster() {
+        let sut = Hero()
+        let monster = Monster()
+        
+        let attackedMonster = sut.attack(monster)
+        
+        XCTAssertEqual(attackedMonster.hp, monster.hp - sut.attack)
+    }
 }

@@ -25,4 +25,10 @@ public struct Hero {
         self.magicAttack = magicAttack
         self.experience = experience
     }
+    
+    public func attack(_ monster: Monster) -> Monster {
+        var _monster = monster
+        _monster.beAttacked(by: self)
+        return _monster
+    }
 }
