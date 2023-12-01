@@ -13,7 +13,7 @@ public class GameProcessor: ObservableObject {
     public let talks: [Talk]
     private var currentTalkIndex: Int = 0
     private let damageCalculator: DamageCalculator = DamageCalculator()
-    private let hero: Hero
+    public let hero: Hero
     public let monster: Monster
     public private(set) var attackingMonster: Monster
     
