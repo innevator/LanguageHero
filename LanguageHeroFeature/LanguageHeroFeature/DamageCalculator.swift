@@ -18,7 +18,7 @@ public class DamageCalculator {
     
     public func calculate(input: String, talk: Talk) -> Double {
         if input == talk.value {
-            self.rate = 2
+            self.rate *= 2
         }
         else {
             
@@ -34,10 +34,10 @@ public class DamageCalculator {
             }
             
             if correntInputs > 0 {
-                self.rate = self.rate * (self.rate + Double(correntInputs)/Double(talks.count))
+                self.rate *= self.rate * (self.rate + Double(correntInputs)/Double(talks.count))
             }
             else {
-                self.rate = 0
+                self.rate = 1
             }
         }
         

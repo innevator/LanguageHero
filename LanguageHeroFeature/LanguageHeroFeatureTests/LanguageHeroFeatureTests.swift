@@ -46,20 +46,21 @@ final class LanguageHeroFeatureTests: XCTestCase {
         XCTAssertEqual(sut.currentTalk, talk3)
     }
     
-    func test_processMoreInputThanTalks_wontCrash() {
+    func test_processNoEnoughTalksWontGameOverOrCrash_stillCanScore() {
         let input1 = "input1"
         let input2 = "input2"
-        let input3 = "input3"
         let talk1 = Talk(value: input1)
         let talk2 = Talk(value: input2)
         
-        let sut = makeSUT(talks: [talk1, talk2])
+        let sut = makeSUT(talks: [talk1, talk2], hero: Hero(attack: 15), monster: Monster(hp: 60))
         
-        sut.execute(input: input1)
-        sut.execute(input: input2)
-        sut.execute(input: input3)
+        sut.execute(input: input1) // 15 * 2
+        sut.execute(input: input2) // 15 * 4
+        sut.execute(input: input2) // 15 * 8
         
         XCTAssertEqual(sut.currentTalk, talk2)
+        XCTAssertEqual(sut.isOver, false)
+        XCTAssertEqual(sut.score, 30 + 60 + 120)
     }
     
     func test_gameover() {
