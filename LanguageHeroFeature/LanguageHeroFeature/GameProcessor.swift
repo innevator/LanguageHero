@@ -8,10 +8,11 @@
 import Foundation
 
 public class GameProcessor: ObservableObject {
-    @Published public private(set) var score: UInt = 0
+    @Published public private(set) var score: Double = 0
     public private(set) var talks: [Talk] = []
     private var currentTalkIndex: Int = 0
     public private(set) var isOver: Bool = false
+    private let damageCalculator: DamageCalculator = DamageCalculator()
     
     public var currentTalk: Talk? {
         if talks.count == 0 { return nil }
@@ -23,8 +24,9 @@ public class GameProcessor: ObservableObject {
     }
     
     public func execute(input: String) {
-        if !isOver, input == currentTalk?.value {
-            score += 1
+        if !isOver, let currentTalk = self.currentTalk {
+            let damageRate = damageCalculator.calculate(input: input, talk: currentTalk)
+            score += damageRate
             goNextTalk()
         }
     }

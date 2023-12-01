@@ -16,7 +16,7 @@ public class DamageCalculator {
         self.totalDamage = totalDamage
     }
     
-    public func calculate(input: String, talk: Talk) {
+    public func calculate(input: String, talk: Talk) -> Double {
         if input == talk.value {
             self.rate = 2
         }
@@ -40,5 +40,7 @@ public class DamageCalculator {
                 self.rate = 0
             }
         }
+        
+        return self.rate
     }
 }

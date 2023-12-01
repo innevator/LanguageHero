@@ -21,9 +21,9 @@ final class DamageCalculator_Tests: XCTestCase {
         let input = ""
         let talk = Talk(value: "")
         
-        sut.calculate(input: input, talk: talk)
+        let rate = sut.calculate(input: input, talk: talk)
         
-        XCTAssertEqual(sut.rate, 2)
+        XCTAssertEqual(rate, 2)
     }
     
     func test_decreaseDamageRateToMinWithNoneCorrectInput() {
@@ -31,9 +31,9 @@ final class DamageCalculator_Tests: XCTestCase {
         let input = ""
         let talk = Talk(value: "talk")
         
-        sut.calculate(input: input, talk: talk)
+        let rate = sut.calculate(input: input, talk: talk)
         
-        XCTAssertEqual(sut.rate, 0)
+        XCTAssertEqual(rate, 0)
     }
     
     func test_decreaseDamageRateWithSomeCorrectInput() {
@@ -41,8 +41,8 @@ final class DamageCalculator_Tests: XCTestCase {
         let input = "this a"
         let talk = Talk(value: "this is a talk")
         
-        sut.calculate(input: input, talk: talk)
+        let rate = sut.calculate(input: input, talk: talk)
         
-        XCTAssertEqual(sut.rate, 1 + 1 * 0.5)
+        XCTAssertEqual(rate, 1.5)
     }
 }
