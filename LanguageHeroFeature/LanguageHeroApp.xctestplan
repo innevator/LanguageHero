@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "B29B2928-D3E8-4E4E-9791-626C7501A87D",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:LanguageHeroFeature.xcodeproj",
+        "identifier" : "FE3B66FF2B1A4993000E37C2",
+        "name" : "LanguageHeroAppTests"
+      }
+    }
+  ],
+  "version" : 1
+}
