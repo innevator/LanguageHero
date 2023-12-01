@@ -1,19 +1,18 @@
 {
   "configurations" : [
     {
-      "id" : "E9C8A211-8FAE-42AF-B616-54B5F29A2BB0",
-      "name" : "Test Scheme Action",
+      "id" : "49764AA0-3D32-4721-8A45-D22AF512CBDD",
+      "name" : "Configuration 1",
       "options" : {
 
       }
     }
   ],
   "defaultOptions" : {
-    "codeCoverage" : false
+
   },
   "testTargets" : [
     {
-      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:LanguageHeroFeature.xcodeproj",
         "identifier" : "FE031E952B16EDF30070BF14",
