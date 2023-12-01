@@ -9,13 +9,19 @@ import Foundation
 
 public class GameProcessor: ObservableObject {
     @Published public private(set) var score: Double = 0
-    @Published public private(set) var isOver: Bool = false
+    @Published public private(set) var isOver: Bool = false {
+        didSet {
+            if isOver { monsterAttackCountDownTimer = nil }
+            else { startMonsterAttackCountDown() }
+        }
+    }
     public let talks: [Talk]
     private var currentTalkIndex: Int = 0
     private let damageCalculator: DamageCalculator = DamageCalculator()
     public let hero: Hero
     public let monster: Monster
     public private(set) var attackingMonster: Monster
+    public private(set) var monsterAttackCountDownTimer: Timer?
     
     public var currentTalk: Talk? {
         if talks.count == 0 { return nil }
@@ -27,6 +33,8 @@ public class GameProcessor: ObservableObject {
         self.hero = hero
         self.monster = monster
         self.attackingMonster = monster
+        
+        startMonsterAttackCountDown()
     }
     
     public func execute(input: String) {
@@ -55,5 +63,15 @@ public class GameProcessor: ObservableObject {
         score = 0
         currentTalkIndex = 0
         damageCalculator.reset()
+    }
+    
+    public func startMonsterAttackCountDown() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + monster.countDownAttackSecond) {
+            self.monsterAttackCountDownTimer = Timer.scheduledTimer(withTimeInterval: self.monster.countDownAttackSecond, repeats: true) { [weak self] _ in
+                guard let self = self else { return }
+                self.attackingMonster.attack(self.hero)
+            }
+            self.monsterAttackCountDownTimer?.fire()
+        }
     }
 }

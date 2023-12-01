@@ -7,8 +7,9 @@
 
 import Foundation
 
-public struct Hero {
+public class Hero {
     public var hp: Int
+    public let maxHp: Int
     public var mp: Int
     public var attack: Int
     public var magicAttack: Int
@@ -20,6 +21,7 @@ public struct Hero {
                 magicAttack: Int = 20,
                 experience: Double = 0) {
         self.hp = hp
+        self.maxHp = hp
         self.mp = mp
         self.attack = attack
         self.magicAttack = magicAttack

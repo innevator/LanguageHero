@@ -15,6 +15,7 @@ final class LanguageHeroFeatureTests: XCTestCase {
         XCTAssertEqual(sut.score, 0)
         XCTAssertEqual(sut.talks.count, 0)
         XCTAssertEqual(sut.currentTalk, nil)
+        XCTAssertEqual(sut.monsterAttackCountDownTimer, nil)
     }
     
     func test_score() {
@@ -78,6 +79,7 @@ final class LanguageHeroFeatureTests: XCTestCase {
         sut.execute(input: input2)
         
         XCTAssertEqual(sut.isOver, true)
+        XCTAssertEqual(sut.monsterAttackCountDownTimer, nil)
     }
     
     func test_endGameAndRestartPlay() {
@@ -104,6 +106,25 @@ final class LanguageHeroFeatureTests: XCTestCase {
         sut.execute(input: input1)
         
         XCTAssertEqual(sut.score, 60)
+    }
+    
+    func test_MonsterAttackCountDown() {
+        let input1 = "input1"
+        let input2 = "input2"
+        let talk1 = Talk(value: input1)
+        let talk2 = Talk(value: input2)
+        let hero = Hero(hp: 100)
+        let countDownAttackSecond: TimeInterval = 0.02
+        let monster = Monster(hp: 30, attack: 20, countDownAttackSecond: countDownAttackSecond)
+        let sut = makeSUT(talks: [talk1, talk2], hero: hero, monster: monster)
+        
+        RunLoop.current.run(until: Date(timeIntervalSinceNow: countDownAttackSecond * 1.3))
+        
+        XCTAssertEqual(sut.hero.hp, sut.hero.maxHp - monster.attack)
+        
+        RunLoop.current.run(until: Date(timeIntervalSinceNow: countDownAttackSecond * 1.3))
+        
+        XCTAssertEqual(sut.hero.hp, sut.hero.maxHp - monster.attack * 2)
     }
     
     // MARK: - Helper
