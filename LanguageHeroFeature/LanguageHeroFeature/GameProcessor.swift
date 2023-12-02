@@ -11,8 +11,15 @@ public class GameProcessor: ObservableObject {
     @Published public private(set) var score: Double = 0
     @Published public private(set) var isOver: Bool = false {
         didSet {
-            if isOver { monsterAttackCountDownTimer = nil }
-            else { startMonsterAttackCountDown() }
+            if isOver {
+                if monsterAttackCountDownTimer?.isValid == true {
+                    monsterAttackCountDownTimer?.invalidate()
+                    monsterAttackCountDownTimer = nil
+                }
+            }
+            else {
+                startMonsterAttackCountDown()
+            }
         }
     }
     public let talks: [Talk]
@@ -75,7 +82,7 @@ public class GameProcessor: ObservableObject {
                 self.monster.attack(self.hero)
                 
                 if self.hero.hp <= 0 {
-                    isOver = true
+                    self.isOver = true
                 }
             }
             self.monsterAttackCountDownTimer?.fire()
