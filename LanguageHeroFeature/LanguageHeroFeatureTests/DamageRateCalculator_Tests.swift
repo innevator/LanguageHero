@@ -1,5 +1,5 @@
 //
-//  DamageCalculator_Tests.swift
+//  DamageRateCalculator_Tests.swift
 //  LanguageHeroFeatureTests
 //
 //  Created by 洪宗鴻 on 2023/12/1.
@@ -8,16 +8,15 @@
 import XCTest
 import LanguageHeroFeature
 
-final class DamageCalculator_Tests: XCTestCase {
+final class DamageRateCalculator_Tests: XCTestCase {
     func test_initialize() {
-        let sut = DamageCalculator()
+        let sut = DamageRateCalculator()
         
-        XCTAssertEqual(sut.rate, 1)
-        XCTAssertEqual(sut.totalDamage, 0)
+        XCTAssertEqual(sut.rate, DamageRateCalculator.initialRate)
     }
     
     func test_increaseDamageRateToMaxWithHighCorrectInput() {
-        let sut = DamageCalculator()
+        let sut = DamageRateCalculator()
         let input = ""
         let talk = Talk(value: "")
         
@@ -27,7 +26,7 @@ final class DamageCalculator_Tests: XCTestCase {
     }
     
     func test_keepIncreaseDamageRate() {
-        let sut = DamageCalculator()
+        let sut = DamageRateCalculator()
         let input = ""
         let talk = Talk(value: "")
         
@@ -38,7 +37,7 @@ final class DamageCalculator_Tests: XCTestCase {
     }
     
     func test_decreaseDamageRateToMinWithNoneCorrectInput() {
-        let sut = DamageCalculator()
+        let sut = DamageRateCalculator()
         let input = ""
         let talk = Talk(value: "talk")
         
@@ -48,7 +47,7 @@ final class DamageCalculator_Tests: XCTestCase {
     }
     
     func test_increaseDamageRateWithSomeCorrectInput() {
-        let sut = DamageCalculator()
+        let sut = DamageRateCalculator()
         let input = "this a"
         let talk = Talk(value: "this is a talk")
         

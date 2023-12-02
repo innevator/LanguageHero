@@ -24,7 +24,7 @@ public class GameProcessor: ObservableObject {
     }
     public let talks: [Talk]
     private var currentTalkIndex: Int = 0
-    private let damageCalculator: DamageCalculator
+    private let damageCalculator: DamageRateCalculator = DamageRateCalculator()
     public let hero: Hero
     public let monster: Monster
     public private(set) var monsterAttackCountDownTimer: Timer?
@@ -34,11 +34,10 @@ public class GameProcessor: ObservableObject {
         return talks.count > currentTalkIndex ? talks[currentTalkIndex] : talks[currentTalkIndex - 1]
     }
     
-    public init(talks: [Talk], hero: Hero, monster: Monster, damageCalculator: DamageCalculator = DamageCalculator()) {
+    public init(talks: [Talk], hero: Hero, monster: Monster) {
         self.talks = talks
         self.hero = hero
         self.monster = monster
-        self.damageCalculator = damageCalculator
         
         startMonsterAttackCountDown()
     }
