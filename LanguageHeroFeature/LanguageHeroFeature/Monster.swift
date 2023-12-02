@@ -20,12 +20,17 @@ public class Monster {
         self.countDownAttackSecond = countDownAttackSecond
     }
     
-    public func beAttacked(damage: Int) {
+    public func beAttacked(damage: Int, isKilled: () -> ()) {
         self.hp -= damage
+        if hp <= 0 { isKilled() }
     }
     
-    public func attack(_ hero: Hero) {
-        hero.beAttacked(by: self)
+    
+    /// Monster Attack Hero
+    /// - Parameter hero: hero
+    /// - Returns: if kill hero
+    public func attack(_ hero: Hero, killed: () -> ()) {
+        hero.beAttacked(monster: self, isKilled: killed)
     }
     
     public func reset() {

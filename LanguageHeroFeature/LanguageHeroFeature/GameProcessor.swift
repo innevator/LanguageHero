@@ -47,7 +47,9 @@ public class GameProcessor: ObservableObject {
         if !isOver, let currentTalk = self.currentTalk {
             let damageRate = damageCalculator.calculate(input: input, talk: currentTalk)
             let damage = Int(damageRate * Double(hero.attack))
-            hero.attack(monster, damage: damage)
+            hero.attack(monster, damage: damage) { [weak self] in
+                self?.isOver = true
+            }
             score += damage
             goNextTalk()
         }
@@ -56,14 +58,6 @@ public class GameProcessor: ObservableObject {
     private func goNextTalk() {
         if talks.count > currentTalkIndex {
             currentTalkIndex += 1
-        }
-        
-        if monster.hp <= 0 {
-            isOver = true
-        }
-        
-        if hero.hp <= 0 {
-            isOver = true
         }
     }
     
@@ -80,10 +74,8 @@ public class GameProcessor: ObservableObject {
         DispatchQueue.main.asyncAfter(deadline: .now() + monster.countDownAttackSecond) {
             self.monsterAttackCountDownTimer = Timer.scheduledTimer(withTimeInterval: self.monster.countDownAttackSecond, repeats: true) { [weak self] _ in
                 guard let self = self else { return }
-                self.monster.attack(self.hero)
-                
-                if self.hero.hp <= 0 {
-                    self.isOver = true
+                self.monster.attack(self.hero) { [weak self] in
+                    self?.isOver = true
                 }
             }
             self.monsterAttackCountDownTimer?.fire()

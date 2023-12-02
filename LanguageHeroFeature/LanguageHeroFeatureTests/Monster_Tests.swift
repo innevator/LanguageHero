@@ -15,11 +15,11 @@ final class Monster_Tests: XCTestCase {
         XCTAssertEqual(sut.hp, 100)
     }
     
-    func test_MonsterAttackHero() {
+    func test_MonsterAttackHero_stillAlive() {
         let sut = Monster()
         let hero = Hero()
         
-        sut.attack(hero)
+        sut.attack(hero) { }
         
         XCTAssertEqual(hero.hp, hero.maxHp - sut.attack)
     }

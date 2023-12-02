@@ -28,12 +28,13 @@ public class Hero {
         self.experience = experience
     }
     
-    public func attack(_ monster: Monster, damage: Int) {
-        monster.beAttacked(damage: damage)
+    public func attack(_ monster: Monster, damage: Int, killed: () -> ()) {
+        monster.beAttacked(damage: damage, isKilled: killed)
     }
     
-    public func beAttacked(by monster: Monster) {
+    public func beAttacked(monster: Monster, isKilled: () -> ()) {
         self.hp -= monster.attack
+        if hp <= 0 { isKilled() }
     }
     
     public func reset() {
