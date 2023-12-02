@@ -20,8 +20,8 @@ public class Monster {
         self.countDownAttackSecond = countDownAttackSecond
     }
     
-    public func beAttacked(by hero: Hero) {
-        self.hp -= hero.attack
+    public func beAttacked(damage: Int) {
+        self.hp -= damage
     }
     
     public func attack(_ hero: Hero) {

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class DamageCalculator {
+open class DamageCalculator {
     public static let initialRate: Double = 1
     
     public private(set) var rate: Double
@@ -18,7 +18,7 @@ public class DamageCalculator {
         self.totalDamage = totalDamage
     }
     
-    public func calculate(input: String, talk: Talk) -> Double {
+    open func calculate(input: String, talk: Talk) -> Double {
         if input == talk.value {
             self.rate *= 2
         }

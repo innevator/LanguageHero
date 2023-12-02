@@ -8,7 +8,7 @@
 import Foundation
 
 public class GameProcessor: ObservableObject {
-    @Published public private(set) var score: Double = 0
+    @Published public private(set) var score: Int = 0
     @Published public private(set) var isOver: Bool = false {
         didSet {
             if isOver {
@@ -24,7 +24,7 @@ public class GameProcessor: ObservableObject {
     }
     public let talks: [Talk]
     private var currentTalkIndex: Int = 0
-    private let damageCalculator: DamageCalculator = DamageCalculator()
+    private let damageCalculator: DamageCalculator
     public let hero: Hero
     public let monster: Monster
     public private(set) var monsterAttackCountDownTimer: Timer?
@@ -34,10 +34,11 @@ public class GameProcessor: ObservableObject {
         return talks.count > currentTalkIndex ? talks[currentTalkIndex] : talks[currentTalkIndex - 1]
     }
     
-    public init(talks: [Talk], hero: Hero, monster: Monster) {
+    public init(talks: [Talk], hero: Hero, monster: Monster, damageCalculator: DamageCalculator = DamageCalculator()) {
         self.talks = talks
         self.hero = hero
         self.monster = monster
+        self.damageCalculator = damageCalculator
         
         startMonsterAttackCountDown()
     }
@@ -45,8 +46,8 @@ public class GameProcessor: ObservableObject {
     public func execute(input: String) {
         if !isOver, let currentTalk = self.currentTalk {
             let damageRate = damageCalculator.calculate(input: input, talk: currentTalk)
-            let damage = damageRate * Double(hero.attack)
-            hero.attack(monster)
+            let damage = Int(damageRate * Double(hero.attack))
+            hero.attack(monster, damage: damage)
             score += damage
             goNextTalk()
         }

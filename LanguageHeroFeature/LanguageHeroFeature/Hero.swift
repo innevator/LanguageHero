@@ -28,8 +28,8 @@ public class Hero {
         self.experience = experience
     }
     
-    public func attack(_ monster: Monster) {
-        monster.beAttacked(by: self)
+    public func attack(_ monster: Monster, damage: Int) {
+        monster.beAttacked(damage: damage)
     }
     
     public func beAttacked(by monster: Monster) {
