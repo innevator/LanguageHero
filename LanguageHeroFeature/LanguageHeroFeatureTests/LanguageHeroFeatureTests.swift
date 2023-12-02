@@ -129,7 +129,7 @@ final class LanguageHeroFeatureTests: XCTestCase {
     func test_loseGameAndRestartPlay() {
         let hp = 20
         let hero = Hero(hp: hp)
-        let countDownAttackSecond: TimeInterval = 0.1
+        let countDownAttackSecond: TimeInterval = 0.02
         let monster = Monster(attack: hp, countDownAttackSecond: countDownAttackSecond)
         let sut = makeSUT(talks: [], hero: hero, monster: monster)
         
