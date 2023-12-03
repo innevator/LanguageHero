@@ -91,7 +91,7 @@ public class GameProcessor {
     }
     
     private func startMonsterAttackCountDown() {
-        let timer = Timer(fire: Date(timeIntervalSinceNow: monsterAttackCountDownTimerPauseFireInterval ?? currentMonster.countDownAttackSecond), interval: currentMonster.countDownAttackSecond, repeats: true) {[weak self] _ in
+        let timer = Timer(fire: Date(timeIntervalSinceNow: monsterAttackCountDownTimerPauseFireInterval ?? currentMonster.countDownAttackSeconds), interval: currentMonster.countDownAttackSeconds, repeats: true) {[weak self] _ in
             guard let self = self else { return }
             self.currentMonster.attack(self.hero) { [weak self] in
                 self?.gameStatus = .lose

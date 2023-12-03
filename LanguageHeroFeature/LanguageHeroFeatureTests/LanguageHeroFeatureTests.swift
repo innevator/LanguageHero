@@ -115,17 +115,17 @@ final class LanguageHeroFeatureTests: XCTestCase {
         let talk1 = Talk(value: input1)
         let talk2 = Talk(value: input2)
         let hero = Hero(hp: 100)
-        let countDownAttackSecond: TimeInterval = 0.02
-        let monster = Monster(hp: 30, attack: 20, countDownAttackSecond: countDownAttackSecond)
+        let countDownAttackSeconds: TimeInterval = 0.02
+        let monster = Monster(hp: 30, attack: 20, countDownAttackSeconds: countDownAttackSeconds)
         let sut = makeSUT(talks: [talk1, talk2], hero: hero, monsters: [monster])
         
         sut.start()
         
-        RunLoop.current.run(until: Date(timeIntervalSinceNow: countDownAttackSecond * 1.3))
+        RunLoop.current.run(until: Date(timeIntervalSinceNow: countDownAttackSeconds * 1.3))
         
         XCTAssertEqual(sut.hero.hp, sut.hero.maxHp - monster.attack)
         
-        RunLoop.current.run(until: Date(timeIntervalSinceNow: countDownAttackSecond * 1.3))
+        RunLoop.current.run(until: Date(timeIntervalSinceNow: countDownAttackSeconds * 1.3))
         
         XCTAssertEqual(sut.hero.hp, sut.hero.maxHp - monster.attack * 2)
     }
@@ -133,13 +133,13 @@ final class LanguageHeroFeatureTests: XCTestCase {
     func test_loseGameAndRestartPlay() {
         let hp = 20
         let hero = Hero(hp: hp)
-        let countDownAttackSecond: TimeInterval = 0.02
-        let monster = Monster(attack: hp, countDownAttackSecond: countDownAttackSecond)
+        let countDownAttackSeconds: TimeInterval = 0.02
+        let monster = Monster(attack: hp, countDownAttackSeconds: countDownAttackSeconds)
         let sut = makeSUT(talks: [], hero: hero, monsters: [monster])
         
         sut.start()
         
-        RunLoop.current.run(until: Date(timeIntervalSinceNow: countDownAttackSecond * 1.3))
+        RunLoop.current.run(until: Date(timeIntervalSinceNow: countDownAttackSeconds * 1.3))
         
         XCTAssertEqual(sut.gameStatus, .lose)
         
@@ -189,7 +189,7 @@ final class LanguageHeroFeatureTests: XCTestCase {
         let damage = 20
         let hero = Hero(hp: damage)
         let countdown = 0.02
-        let monster = Monster(attack: damage, countDownAttackSecond: countdown)
+        let monster = Monster(attack: damage, countDownAttackSeconds: countdown)
         let sut = makeSUT(talks: [Talk()], hero: hero, monsters: [monster])
         
         sut.start()

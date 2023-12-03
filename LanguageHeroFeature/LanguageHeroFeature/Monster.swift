@@ -12,13 +12,13 @@ public class Monster: Equatable {
     public private(set) var hp: Int
     public let maxHp: Int
     public private(set) var attack: Int
-    private(set) var countDownAttackSecond: TimeInterval
+    private(set) var countDownAttackSeconds: TimeInterval
     
-    public init(hp: Int = 100, attack: Int = 20, countDownAttackSecond: TimeInterval = 5) {
+    public init(hp: Int = 100, attack: Int = 20, countDownAttackSeconds: TimeInterval = 5) {
         self.hp = hp
         self.maxHp = hp
         self.attack = attack
-        self.countDownAttackSecond = countDownAttackSecond
+        self.countDownAttackSeconds = countDownAttackSeconds
     }
     
     public func beAttacked(damage: Int, isKilled: () -> ()) {
@@ -26,10 +26,6 @@ public class Monster: Equatable {
         if hp <= 0 { isKilled() }
     }
     
-    
-    /// Monster Attack Hero
-    /// - Parameter hero: hero
-    /// - Returns: if kill hero
     public func attack(_ hero: Hero, killed: () -> ()) {
         hero.beAttacked(monster: self, isKilled: killed)
     }
