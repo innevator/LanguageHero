@@ -44,7 +44,7 @@ public class GameProcessor {
         return monsters.count > currentMonsterIndex ? monsters[currentMonsterIndex] : monsters[currentMonsterIndex - 1]
     }
     public private(set) var monsterAttackCountDownTimer: Timer?
-    public private(set) var monsterAttackCountDownTimerPauseFireInterval: TimeInterval?
+    private var monsterAttackCountDownTimerPauseFireInterval: TimeInterval?
     
     public init(talks: [Talk], hero: Hero, monsters: [Monster]) {
         self.talks = talks
