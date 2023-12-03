@@ -193,14 +193,15 @@ final class LanguageHeroFeatureTests: XCTestCase {
         let sut = makeSUT(talks: [Talk()], hero: hero, monsters: [monster])
         
         sut.start()
+        RunLoop.current.run(until: Date(timeIntervalSinceNow: countdown / 2))
         sut.pause()
-        RunLoop.current.run(until: Date(timeIntervalSinceNow: countdown * 1.3))
+        RunLoop.current.run(until: Date(timeIntervalSinceNow: countdown))
         
         XCTAssertEqual(sut.gameStatus, .pause)
         XCTAssertEqual(sut.hero.hp, sut.hero.maxHp)
         
         sut.resume()
-        RunLoop.current.run(until: Date(timeIntervalSinceNow: countdown * 1.3))
+        RunLoop.current.run(until: Date(timeIntervalSinceNow: countdown / 2))
         
         XCTAssertEqual(sut.gameStatus, .lose)
         XCTAssertEqual(sut.hero.hp, 0)

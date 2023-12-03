@@ -44,7 +44,7 @@ public class GameProcessor: ObservableObject {
         return monsters.count > currentMonsterIndex ? monsters[currentMonsterIndex] : monsters[currentMonsterIndex - 1]
     }
     public private(set) var monsterAttackCountDownTimer: Timer?
-    private var monsterAttackCountDownTimerPauseFireInterval: TimeInterval?
+    public private(set) var monsterAttackCountDownTimerPauseFireInterval: TimeInterval?
     
     public init(talks: [Talk], hero: Hero, monsters: [Monster]) {
         self.talks = talks
@@ -91,7 +91,7 @@ public class GameProcessor: ObservableObject {
     }
     
     private func startMonsterAttackCountDown() {
-        let timer = Timer(fire: Date(timeIntervalSinceNow: currentMonster.countDownAttackSecond), interval: currentMonster.countDownAttackSecond, repeats: true) {[weak self] _ in
+        let timer = Timer(fire: Date(timeIntervalSinceNow: monsterAttackCountDownTimerPauseFireInterval ?? currentMonster.countDownAttackSecond), interval: currentMonster.countDownAttackSecond, repeats: true) {[weak self] _ in
             guard let self = self else { return }
             self.currentMonster.attack(self.hero) { [weak self] in
                 self?.gameStatus = .lose
@@ -119,5 +119,6 @@ public class GameProcessor: ObservableObject {
     
     public func resume() {
         gameStatus = .playing
+        monsterAttackCountDownTimerPauseFireInterval = nil
     }
 }
