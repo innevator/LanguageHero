@@ -13,7 +13,7 @@ let defaultTalks: [Talk] = talks.map { Talk(value: $0) }
 
 struct ContentView: View {
     @Environment (\.scenePhase) private var scenePhase
-    @StateObject var gameProcessor = GameProcessor(talks: defaultTalks, hero: Hero(), monsters: [Monster(countDownAttackSecond: 2), Monster()])
+    private let gameProcessor = GameProcessor(talks: defaultTalks, hero: Hero(), monsters: [Monster(countDownAttackSecond: 2), Monster()])
     @State var currentSeconds: Int = 0
     @State var updateRate: Int = 0
     

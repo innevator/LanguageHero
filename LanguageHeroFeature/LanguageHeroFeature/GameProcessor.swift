@@ -7,13 +7,13 @@
 
 import Foundation
 
-public class GameProcessor: ObservableObject {
+public class GameProcessor {
     public enum GameStatus {
         case win, lose, playing, pause
     }
     
-    @Published public private(set) var score: Int = 0
-    @Published public private(set) var gameStatus: GameStatus = .playing {
+    public private(set) var score: Int = 0
+    public private(set) var gameStatus: GameStatus = .playing {
         didSet {
             switch gameStatus {
             case .win, .lose, .pause:
