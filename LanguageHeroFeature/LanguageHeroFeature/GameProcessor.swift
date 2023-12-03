@@ -7,10 +7,17 @@
 
 import Foundation
 
-public class GameProcessor {
+/// Tthe main game flow
+public final class GameProcessor {
     public enum GameStatus {
         case win, lose, playing, pause
     }
+    
+    // MARK: - Properties
+    
+    private let damageCalculator: DamageRateCalculator = DamageRateCalculator()
+    
+    // MARK: - GameState
     
     public private(set) var score: Int = 0
     public private(set) var gameStatus: GameStatus = .playing {
@@ -24,7 +31,9 @@ public class GameProcessor {
         }
     }
     
-    private let damageCalculator: DamageRateCalculator = DamageRateCalculator()
+    
+    // MARK: - Hero
+    
     public let hero: Hero
     
     // MARK: - Talks
@@ -37,6 +46,7 @@ public class GameProcessor {
     }
     
     // MARK: - Monsters
+    
     public let monsters: [Monster]
     private var currentMonsterIndex: Int = 0
     public var currentMonster: Monster {
@@ -46,11 +56,17 @@ public class GameProcessor {
     public private(set) var monsterAttackCountDownTimer: Timer?
     private var monsterAttackCountDownTimerPauseFireInterval: TimeInterval?
     
+    
+    // MARK: - Initiailizer
+    
     public init(talks: [Talk], hero: Hero, monsters: [Monster]) {
         self.talks = talks
         self.hero = hero
         self.monsters = monsters
     }
+    
+    
+    // MARK: - Functions
     
     public func execute(input: String) {
         if gameStatus == .playing {
@@ -85,11 +101,35 @@ public class GameProcessor {
         currentMonsterIndex = 0
         damageCalculator.reset()
     }
-    
+}
+
+
+// MARK: - GameFlow
+
+extension GameProcessor {
     public func start() {
         startMonsterAttackCountDown()
     }
     
+    private func stop() {
+        stopMonsterAttackCountDown()
+    }
+    
+    public func pause() {
+        monsterAttackCountDownTimerPauseFireInterval = monsterAttackCountDownTimer?.fireDate.timeIntervalSinceNow
+        gameStatus = .pause
+    }
+    
+    public func resume() {
+        gameStatus = .playing
+        monsterAttackCountDownTimerPauseFireInterval = nil
+    }
+}
+
+
+// MARK: - MonsterTimer
+
+extension GameProcessor {
     private func startMonsterAttackCountDown() {
         let timer = Timer(fire: Date(timeIntervalSinceNow: monsterAttackCountDownTimerPauseFireInterval ?? currentMonster.countDownAttackSeconds), interval: currentMonster.countDownAttackSeconds, repeats: true) {[weak self] _ in
             guard let self = self else { return }
@@ -106,19 +146,5 @@ public class GameProcessor {
             monsterAttackCountDownTimer?.invalidate()
             monsterAttackCountDownTimer = nil
         }
-    }
-    
-    private func stop() {
-        stopMonsterAttackCountDown()
-    }
-    
-    public func pause() {
-        monsterAttackCountDownTimerPauseFireInterval = monsterAttackCountDownTimer?.fireDate.timeIntervalSinceNow
-        gameStatus = .pause
-    }
-    
-    public func resume() {
-        gameStatus = .playing
-        monsterAttackCountDownTimerPauseFireInterval = nil
     }
 }
