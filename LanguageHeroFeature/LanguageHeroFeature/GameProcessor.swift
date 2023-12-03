@@ -9,14 +9,14 @@ import Foundation
 
 public class GameProcessor: ObservableObject {
     public enum GameStatus {
-        case win, lose, playing
+        case win, lose, playing, pause
     }
     
     @Published public private(set) var score: Int = 0
     @Published public private(set) var gameStatus: GameStatus = .playing {
         didSet {
             switch gameStatus {
-            case .win, .lose:
+            case .win, .lose, .pause:
                 stop()
             case .playing:
                 start()
@@ -26,7 +26,6 @@ public class GameProcessor: ObservableObject {
     
     private let damageCalculator: DamageRateCalculator = DamageRateCalculator()
     public let hero: Hero
-    public private(set) var monsterAttackCountDownTimer: Timer?
     
     // MARK: - Talks
     
@@ -44,6 +43,8 @@ public class GameProcessor: ObservableObject {
         if monsters.count == 0 { return Monster() }
         return monsters.count > currentMonsterIndex ? monsters[currentMonsterIndex] : monsters[currentMonsterIndex - 1]
     }
+    public private(set) var monsterAttackCountDownTimer: Timer?
+    private var monsterAttackCountDownTimerPauseFireInterval: TimeInterval?
     
     public init(talks: [Talk], hero: Hero, monsters: [Monster]) {
         self.talks = talks
@@ -90,21 +91,33 @@ public class GameProcessor: ObservableObject {
     }
     
     private func startMonsterAttackCountDown() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + currentMonster.countDownAttackSecond) {
-            self.monsterAttackCountDownTimer = Timer.scheduledTimer(withTimeInterval: self.currentMonster.countDownAttackSecond, repeats: true) { [weak self] _ in
-                guard let self = self else { return }
-                self.currentMonster.attack(self.hero) { [weak self] in
-                    self?.gameStatus = .lose
-                }
+        let timer = Timer(fire: Date(timeIntervalSinceNow: currentMonster.countDownAttackSecond), interval: currentMonster.countDownAttackSecond, repeats: true) {[weak self] _ in
+            guard let self = self else { return }
+            self.currentMonster.attack(self.hero) { [weak self] in
+                self?.gameStatus = .lose
             }
-            self.monsterAttackCountDownTimer?.fire()
         }
+        self.monsterAttackCountDownTimer = timer
+        RunLoop.current.add(timer, forMode: .common)
     }
     
-    private func stop() {
+    private func stopMonsterAttackCountDown() {
         if monsterAttackCountDownTimer?.isValid == true {
             monsterAttackCountDownTimer?.invalidate()
             monsterAttackCountDownTimer = nil
         }
+    }
+    
+    private func stop() {
+        stopMonsterAttackCountDown()
+    }
+    
+    public func pause() {
+        monsterAttackCountDownTimerPauseFireInterval = monsterAttackCountDownTimer?.fireDate.timeIntervalSinceNow
+        gameStatus = .pause
+    }
+    
+    public func resume() {
+        gameStatus = .playing
     }
 }

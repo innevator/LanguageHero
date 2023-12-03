@@ -185,6 +185,27 @@ final class LanguageHeroFeatureTests: XCTestCase {
         XCTAssertEqual(sut.currentMonster, monsters[0])
     }
     
+    func test_gamePauseAndResume() {
+        let damage = 20
+        let hero = Hero(hp: damage)
+        let countdown = 0.02
+        let monster = Monster(attack: damage, countDownAttackSecond: countdown)
+        let sut = makeSUT(talks: [Talk()], hero: hero, monsters: [monster])
+        
+        sut.start()
+        sut.pause()
+        RunLoop.current.run(until: Date(timeIntervalSinceNow: countdown * 1.3))
+        
+        XCTAssertEqual(sut.gameStatus, .pause)
+        XCTAssertEqual(sut.hero.hp, sut.hero.maxHp)
+        
+        sut.resume()
+        RunLoop.current.run(until: Date(timeIntervalSinceNow: countdown * 1.3))
+        
+        XCTAssertEqual(sut.gameStatus, .lose)
+        XCTAssertEqual(sut.hero.hp, 0)
+    }
+    
     // MARK: - Helper
     private func makeSUT(
         talks: [Talk],
