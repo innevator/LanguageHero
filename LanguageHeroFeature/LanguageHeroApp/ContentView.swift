@@ -25,10 +25,10 @@ struct ContentView: View {
             Text("時間: \(currentSeconds)")
             Text("分數: \(gameProcessor.score)")
             
-            if gameProcessor.isOver {
+            if gameProcessor.gameStatus != .playing {
                 Spacer()
                 
-                restartView
+                resultView
             }
             else {
                 monsterView
@@ -46,7 +46,7 @@ struct ContentView: View {
         }
         .padding()
         .onReceive(timer) { _ in
-            if !gameProcessor.isOver {
+            if gameProcessor.gameStatus == .playing {
                 currentSeconds += 1
             }
         }
@@ -65,10 +65,15 @@ struct ContentView: View {
         }
     }
     
-    var restartView: some View {
-        Button("restart") {
-            gameProcessor.restart()
-            currentSeconds = 0
+    var resultView: some View {
+        VStack {
+            Text(gameProcessor.gameStatus == .win ? "Win!!!" : "Lose...")
+                .font(.largeTitle)
+            
+            Button("restart") {
+                gameProcessor.restart()
+                currentSeconds = 0
+            }
         }
     }
     

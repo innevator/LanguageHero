@@ -8,20 +8,30 @@
 import Foundation
 
 public class GameProcessor: ObservableObject {
+    public enum GameStatus {
+        case win, lose, playing
+    }
+    
     @Published public private(set) var score: Int = 0
-    @Published public private(set) var isOver: Bool = false {
+    @Published public private(set) var gameStatus: GameStatus = .playing {
         didSet {
-            if isOver {
+            switch gameStatus {
+            case .win:
                 if monsterAttackCountDownTimer?.isValid == true {
                     monsterAttackCountDownTimer?.invalidate()
                     monsterAttackCountDownTimer = nil
                 }
-            }
-            else {
+            case .lose:
+                if monsterAttackCountDownTimer?.isValid == true {
+                    monsterAttackCountDownTimer?.invalidate()
+                    monsterAttackCountDownTimer = nil
+                }
+            case .playing:
                 startMonsterAttackCountDown()
             }
         }
     }
+    
     private let damageCalculator: DamageRateCalculator = DamageRateCalculator()
     public let hero: Hero
     public private(set) var monsterAttackCountDownTimer: Timer?
@@ -52,13 +62,13 @@ public class GameProcessor: ObservableObject {
     }
     
     public func execute(input: String) {
-        if !isOver {
+        if gameStatus == .playing {
             let damageRate = damageCalculator.calculate(input: input, talk: currentTalk)
             let damage = Int(damageRate * Double(hero.attack))
             hero.attack(currentMonster, damage: damage) { [weak self] in
                 guard let hp = self?.monsters.last?.hp else { return }
                 if hp <= 0 {
-                    self?.isOver = true
+                    self?.gameStatus = .win
                 }
                 else {
                     self?.currentMonsterIndex += 1
@@ -76,7 +86,7 @@ public class GameProcessor: ObservableObject {
     }
     
     public func restart() {
-        isOver = false
+        gameStatus = .playing
         monsters.forEach({ $0.reset() })
         hero.reset()
         score = 0
@@ -90,7 +100,7 @@ public class GameProcessor: ObservableObject {
             self.monsterAttackCountDownTimer = Timer.scheduledTimer(withTimeInterval: self.currentMonster.countDownAttackSecond, repeats: true) { [weak self] _ in
                 guard let self = self else { return }
                 self.currentMonster.attack(self.hero) { [weak self] in
-                    self?.isOver = true
+                    self?.gameStatus = .lose
                 }
             }
             self.monsterAttackCountDownTimer?.fire()

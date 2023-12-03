@@ -16,6 +16,7 @@ final class LanguageHeroFeatureTests: XCTestCase {
         XCTAssertEqual(sut.talks.count, 0)
         XCTAssertEqual(sut.currentTalk, Talk())
         XCTAssertEqual(sut.monsterAttackCountDownTimer, nil)
+        XCTAssertEqual(sut.gameStatus, .playing)
     }
     
     func test_score() {
@@ -60,11 +61,11 @@ final class LanguageHeroFeatureTests: XCTestCase {
         sut.execute(input: input2) // 15 * 8
         
         XCTAssertEqual(sut.currentTalk, talk2)
-        XCTAssertEqual(sut.isOver, false)
+        XCTAssertEqual(sut.gameStatus, .playing)
         XCTAssertEqual(sut.score, heroAttack * 14)
     }
     
-    func test_gameover() {
+    func test_winGame() {
         let input1 = "input1"
         let input2 = "input2"
         let talk1 = Talk(value: input1)
@@ -74,11 +75,11 @@ final class LanguageHeroFeatureTests: XCTestCase {
         
         sut.execute(input: input1) // 15 * 2
         
-        XCTAssertEqual(sut.isOver, false)
+        XCTAssertEqual(sut.gameStatus, .playing)
         
         sut.execute(input: input2) // 15 * 4
         
-        XCTAssertEqual(sut.isOver, true)
+        XCTAssertEqual(sut.gameStatus, .win)
         XCTAssertEqual(sut.monsterAttackCountDownTimer, nil)
     }
     
@@ -92,13 +93,13 @@ final class LanguageHeroFeatureTests: XCTestCase {
         
         sut.execute(input: input1) // 30 * 2
         
-        XCTAssertEqual(sut.isOver, true)
+        XCTAssertEqual(sut.gameStatus, .win)
         XCTAssertEqual(sut.currentMonster.hp, 0)
         XCTAssertEqual(sut.currentTalk.value, talk2.value)
         
         sut.restart()
         
-        XCTAssertEqual(sut.isOver, false)
+        XCTAssertEqual(sut.gameStatus, .playing)
         XCTAssertEqual(sut.currentMonster.hp, sut.currentMonster.maxHp)
         XCTAssertEqual(sut.score, 0)
         XCTAssertEqual(sut.currentTalk.value, talk1.value)
@@ -136,15 +137,15 @@ final class LanguageHeroFeatureTests: XCTestCase {
         
         RunLoop.current.run(until: Date(timeIntervalSinceNow: countDownAttackSecond * 1.3))
         
-        XCTAssertEqual(sut.isOver, true)
+        XCTAssertEqual(sut.gameStatus, .lose)
         
         sut.restart()
         
-        XCTAssertEqual(sut.isOver, false)
+        XCTAssertEqual(sut.gameStatus, .playing)
         XCTAssertEqual(sut.hero.hp, sut.hero.maxHp)
     }
     
-    func test_gameoverWhenKillAllMonsters() {
+    func test_winGameWhenKillAllMonsters() {
         let damage = 20
         let hero = Hero(attack: damage)
         let monsters = getMonsters(count: 3, hp: damage)
@@ -154,17 +155,17 @@ final class LanguageHeroFeatureTests: XCTestCase {
         
         sut.execute(input: "")
         
-        XCTAssertEqual(sut.isOver, false)
+        XCTAssertEqual(sut.gameStatus, .playing)
         XCTAssertEqual(sut.currentMonster, monsters[1])
         
         sut.execute(input: "")
         
-        XCTAssertEqual(sut.isOver, false)
+        XCTAssertEqual(sut.gameStatus, .playing)
         XCTAssertEqual(sut.currentMonster, monsters[2])
         
         sut.execute(input: "")
         
-        XCTAssertEqual(sut.isOver, true)
+        XCTAssertEqual(sut.gameStatus, .win)
     }
     
     func test_winGameAndRestartShouldResetToFirstOneMonster() {
