@@ -12,12 +12,16 @@ let talks: [String] = ["fireball", "thunder"]
 let defaultTalks: [Talk] = talks.map { Talk(value: $0) }
 
 struct ContentView: View {
-    @StateObject var gameProcessor = GameProcessor(talks: defaultTalks, hero: Hero(), monster: Monster())
+    @StateObject var gameProcessor = GameProcessor(talks: defaultTalks, hero: Hero(), monsters: [Monster(), Monster()])
     @State var currentSeconds: Int = 0
+    @State var updateRate: Int = 0
+    
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    let fpsTimer = Timer.publish(every: 1/60, on: .main, in: .common).autoconnect()
     
     var body: some View {
         VStack {
+            Text("\(updateRate)").hidden()
             Text("時間: \(currentSeconds)")
             Text("分數: \(gameProcessor.score)")
             
@@ -46,11 +50,14 @@ struct ContentView: View {
                 currentSeconds += 1
             }
         }
+        .onReceive(fpsTimer) { _ in
+            updateRate += 1
+        }
     }
     
     var monsterView: some View {
         VStack {
-            ProgressView(value: Double(gameProcessor.monster.hp), total: Double(gameProcessor.monster.maxHp)).tint(Color.red)
+            ProgressView(value: Double(gameProcessor.currentMonster?.hp ?? 0), total: Double(gameProcessor.currentMonster?.maxHp ?? 0)).tint(Color.red)
             
             Rectangle().fill(Color.black).frame(width: 100, height: 100)
             

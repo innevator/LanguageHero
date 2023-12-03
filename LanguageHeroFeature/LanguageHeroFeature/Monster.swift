@@ -7,7 +7,8 @@
 
 import Foundation
 
-public class Monster {
+public class Monster: Equatable {
+    public private(set) var id: UUID = UUID()
     public private(set) var hp: Int
     public let maxHp: Int
     public private(set) var attack: Int
@@ -35,5 +36,9 @@ public class Monster {
     
     public func reset() {
         hp = self.maxHp
+    }
+    
+    public static func == (lhs: Monster, rhs: Monster) -> Bool {
+        return lhs.id == rhs.id
     }
 }

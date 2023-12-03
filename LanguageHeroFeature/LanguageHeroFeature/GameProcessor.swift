@@ -22,32 +22,47 @@ public class GameProcessor: ObservableObject {
             }
         }
     }
-    public let talks: [Talk]
-    private var currentTalkIndex: Int = 0
     private let damageCalculator: DamageRateCalculator = DamageRateCalculator()
     public let hero: Hero
-    public let monster: Monster
     public private(set) var monsterAttackCountDownTimer: Timer?
     
+    // MARK: - Talks
+    
+    public let talks: [Talk]
+    private var currentTalkIndex: Int = 0
     public var currentTalk: Talk? {
         if talks.count == 0 { return nil }
         return talks.count > currentTalkIndex ? talks[currentTalkIndex] : talks[currentTalkIndex - 1]
     }
     
-    public init(talks: [Talk], hero: Hero, monster: Monster) {
+    // MARK: - Monsters
+    public let monsters: [Monster]
+    private var currentMonsterIndex: Int = 0
+    public var currentMonster: Monster? {
+        if monsters.count == 0 { return nil }
+        return monsters.count > currentMonsterIndex ? monsters[currentMonsterIndex] : monsters[currentMonsterIndex - 1]
+    }
+    
+    public init(talks: [Talk], hero: Hero, monsters: [Monster]) {
         self.talks = talks
         self.hero = hero
-        self.monster = monster
+        self.monsters = monsters
         
         startMonsterAttackCountDown()
     }
     
     public func execute(input: String) {
-        if !isOver, let currentTalk = self.currentTalk {
+        if !isOver, let currentTalk = self.currentTalk, let currentMonster = self.currentMonster {
             let damageRate = damageCalculator.calculate(input: input, talk: currentTalk)
             let damage = Int(damageRate * Double(hero.attack))
-            hero.attack(monster, damage: damage) { [weak self] in
-                self?.isOver = true
+            hero.attack(currentMonster, damage: damage) { [weak self] in
+                guard let hp = self?.monsters.last?.hp else { return }
+                if hp <= 0 {
+                    self?.isOver = true
+                }
+                else {
+                    self?.currentMonsterIndex += 1
+                }
             }
             score += damage
             goNextTalk()
@@ -62,18 +77,19 @@ public class GameProcessor: ObservableObject {
     
     public func restart() {
         isOver = false
-        monster.reset()
+        monsters.forEach({ $0.reset() })
         hero.reset()
         score = 0
         currentTalkIndex = 0
+        currentMonsterIndex = 0
         damageCalculator.reset()
     }
     
     public func startMonsterAttackCountDown() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + monster.countDownAttackSecond) {
-            self.monsterAttackCountDownTimer = Timer.scheduledTimer(withTimeInterval: self.monster.countDownAttackSecond, repeats: true) { [weak self] _ in
-                guard let self = self else { return }
-                self.monster.attack(self.hero) { [weak self] in
+        guard let currentMonster = self.currentMonster else { return }
+        DispatchQueue.main.asyncAfter(deadline: .now() + currentMonster.countDownAttackSecond) {
+            self.monsterAttackCountDownTimer = Timer.scheduledTimer(withTimeInterval: currentMonster.countDownAttackSecond, repeats: true) { [weak currentMonster] _ in
+                currentMonster?.attack(self.hero) { [weak self] in
                     self?.isOver = true
                 }
             }
