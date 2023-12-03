@@ -91,16 +91,6 @@ public final class GameProcessor {
             currentTalkIndex += 1
         }
     }
-    
-    public func restart() {
-        gameStatus = .playing
-        monsters.forEach({ $0.reset() })
-        hero.reset()
-        score = 0
-        currentTalkIndex = 0
-        currentMonsterIndex = 0
-        damageCalculator.reset()
-    }
 }
 
 
@@ -123,6 +113,16 @@ extension GameProcessor {
     public func resume() {
         gameStatus = .playing
         monsterAttackCountDownTimerPauseFireInterval = nil
+    }
+    
+    public func restart() {
+        gameStatus = .playing
+        monsters.forEach({ $0.reset() })
+        hero.reset()
+        score = 0
+        currentTalkIndex = 0
+        currentMonsterIndex = 0
+        damageCalculator.reset()
     }
 }
 
