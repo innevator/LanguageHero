@@ -45,6 +45,9 @@ struct ContentView: View {
             Spacer()
         }
         .padding()
+        .onAppear {
+            gameProcessor.start()
+        }
         .onReceive(timer) { _ in
             if gameProcessor.gameStatus == .playing {
                 currentSeconds += 1

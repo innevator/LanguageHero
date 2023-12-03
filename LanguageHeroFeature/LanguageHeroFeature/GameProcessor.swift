@@ -16,18 +16,10 @@ public class GameProcessor: ObservableObject {
     @Published public private(set) var gameStatus: GameStatus = .playing {
         didSet {
             switch gameStatus {
-            case .win:
-                if monsterAttackCountDownTimer?.isValid == true {
-                    monsterAttackCountDownTimer?.invalidate()
-                    monsterAttackCountDownTimer = nil
-                }
-            case .lose:
-                if monsterAttackCountDownTimer?.isValid == true {
-                    monsterAttackCountDownTimer?.invalidate()
-                    monsterAttackCountDownTimer = nil
-                }
+            case .win, .lose:
+                stop()
             case .playing:
-                startMonsterAttackCountDown()
+                start()
             }
         }
     }
@@ -57,8 +49,6 @@ public class GameProcessor: ObservableObject {
         self.talks = talks
         self.hero = hero
         self.monsters = monsters
-        
-        startMonsterAttackCountDown()
     }
     
     public func execute(input: String) {
@@ -95,7 +85,11 @@ public class GameProcessor: ObservableObject {
         damageCalculator.reset()
     }
     
-    public func startMonsterAttackCountDown() {
+    public func start() {
+        startMonsterAttackCountDown()
+    }
+    
+    private func startMonsterAttackCountDown() {
         DispatchQueue.main.asyncAfter(deadline: .now() + currentMonster.countDownAttackSecond) {
             self.monsterAttackCountDownTimer = Timer.scheduledTimer(withTimeInterval: self.currentMonster.countDownAttackSecond, repeats: true) { [weak self] _ in
                 guard let self = self else { return }
@@ -104,6 +98,13 @@ public class GameProcessor: ObservableObject {
                 }
             }
             self.monsterAttackCountDownTimer?.fire()
+        }
+    }
+    
+    private func stop() {
+        if monsterAttackCountDownTimer?.isValid == true {
+            monsterAttackCountDownTimer?.invalidate()
+            monsterAttackCountDownTimer = nil
         }
     }
 }

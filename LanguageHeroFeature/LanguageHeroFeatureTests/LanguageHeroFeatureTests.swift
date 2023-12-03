@@ -119,6 +119,8 @@ final class LanguageHeroFeatureTests: XCTestCase {
         let monster = Monster(hp: 30, attack: 20, countDownAttackSecond: countDownAttackSecond)
         let sut = makeSUT(talks: [talk1, talk2], hero: hero, monsters: [monster])
         
+        sut.start()
+        
         RunLoop.current.run(until: Date(timeIntervalSinceNow: countDownAttackSecond * 1.3))
         
         XCTAssertEqual(sut.hero.hp, sut.hero.maxHp - monster.attack)
@@ -134,6 +136,8 @@ final class LanguageHeroFeatureTests: XCTestCase {
         let countDownAttackSecond: TimeInterval = 0.02
         let monster = Monster(attack: hp, countDownAttackSecond: countDownAttackSecond)
         let sut = makeSUT(talks: [], hero: hero, monsters: [monster])
+        
+        sut.start()
         
         RunLoop.current.run(until: Date(timeIntervalSinceNow: countDownAttackSecond * 1.3))
         
