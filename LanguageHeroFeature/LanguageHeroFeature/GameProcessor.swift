@@ -30,16 +30,16 @@ public class GameProcessor: ObservableObject {
     
     public let talks: [Talk]
     private var currentTalkIndex: Int = 0
-    public var currentTalk: Talk? {
-        if talks.count == 0 { return nil }
+    public var currentTalk: Talk {
+        if talks.count == 0 { return Talk() }
         return talks.count > currentTalkIndex ? talks[currentTalkIndex] : talks[currentTalkIndex - 1]
     }
     
     // MARK: - Monsters
     public let monsters: [Monster]
     private var currentMonsterIndex: Int = 0
-    public var currentMonster: Monster? {
-        if monsters.count == 0 { return nil }
+    public var currentMonster: Monster {
+        if monsters.count == 0 { return Monster() }
         return monsters.count > currentMonsterIndex ? monsters[currentMonsterIndex] : monsters[currentMonsterIndex - 1]
     }
     
@@ -52,7 +52,7 @@ public class GameProcessor: ObservableObject {
     }
     
     public func execute(input: String) {
-        if !isOver, let currentTalk = self.currentTalk, let currentMonster = self.currentMonster {
+        if !isOver {
             let damageRate = damageCalculator.calculate(input: input, talk: currentTalk)
             let damage = Int(damageRate * Double(hero.attack))
             hero.attack(currentMonster, damage: damage) { [weak self] in
@@ -86,10 +86,10 @@ public class GameProcessor: ObservableObject {
     }
     
     public func startMonsterAttackCountDown() {
-        guard let currentMonster = self.currentMonster else { return }
         DispatchQueue.main.asyncAfter(deadline: .now() + currentMonster.countDownAttackSecond) {
-            self.monsterAttackCountDownTimer = Timer.scheduledTimer(withTimeInterval: currentMonster.countDownAttackSecond, repeats: true) { [weak currentMonster] _ in
-                currentMonster?.attack(self.hero) { [weak self] in
+            self.monsterAttackCountDownTimer = Timer.scheduledTimer(withTimeInterval: self.currentMonster.countDownAttackSecond, repeats: true) { [weak self] _ in
+                guard let self = self else { return }
+                self.currentMonster.attack(self.hero) { [weak self] in
                     self?.isOver = true
                 }
             }

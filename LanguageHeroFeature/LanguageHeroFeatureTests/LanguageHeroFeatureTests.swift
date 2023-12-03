@@ -14,7 +14,7 @@ final class LanguageHeroFeatureTests: XCTestCase {
         
         XCTAssertEqual(sut.score, 0)
         XCTAssertEqual(sut.talks.count, 0)
-        XCTAssertEqual(sut.currentTalk, nil)
+        XCTAssertEqual(sut.currentTalk, Talk())
         XCTAssertEqual(sut.monsterAttackCountDownTimer, nil)
     }
     
@@ -93,15 +93,15 @@ final class LanguageHeroFeatureTests: XCTestCase {
         sut.execute(input: input1) // 30 * 2
         
         XCTAssertEqual(sut.isOver, true)
-        XCTAssertEqual(sut.currentMonster?.hp, 0)
-        XCTAssertEqual(sut.currentTalk?.value, talk2.value)
+        XCTAssertEqual(sut.currentMonster.hp, 0)
+        XCTAssertEqual(sut.currentTalk.value, talk2.value)
         
         sut.restart()
         
         XCTAssertEqual(sut.isOver, false)
-        XCTAssertEqual(sut.currentMonster?.hp, sut.currentMonster?.maxHp)
+        XCTAssertEqual(sut.currentMonster.hp, sut.currentMonster.maxHp)
         XCTAssertEqual(sut.score, 0)
-        XCTAssertEqual(sut.currentTalk?.value, talk1.value)
+        XCTAssertEqual(sut.currentTalk.value, talk1.value)
         
         sut.execute(input: input1) // 30 * 2
         
@@ -148,7 +148,7 @@ final class LanguageHeroFeatureTests: XCTestCase {
         let damage = 20
         let hero = Hero(attack: damage)
         let monsters = getMonsters(count: 3, hp: damage)
-        let sut = makeSUT(talks: [Talk(value: "")], hero: hero, monsters: monsters)
+        let sut = makeSUT(talks: [Talk()], hero: hero, monsters: monsters)
         
         XCTAssertEqual(sut.currentMonster, monsters[0])
         
@@ -171,7 +171,7 @@ final class LanguageHeroFeatureTests: XCTestCase {
         let damage = 20
         let hero = Hero(attack: damage)
         let monsters = getMonsters(count: 2, hp: damage)
-        let sut = makeSUT(talks: [Talk(value: "")], hero: hero, monsters: monsters)
+        let sut = makeSUT(talks: [Talk()], hero: hero, monsters: monsters)
         
         sut.execute(input: "")
         sut.execute(input: "")

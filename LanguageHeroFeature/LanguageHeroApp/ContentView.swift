@@ -57,7 +57,7 @@ struct ContentView: View {
     
     var monsterView: some View {
         VStack {
-            ProgressView(value: Double(gameProcessor.currentMonster?.hp ?? 0), total: Double(gameProcessor.currentMonster?.maxHp ?? 0)).tint(Color.red)
+            ProgressView(value: Double(gameProcessor.currentMonster.hp), total: Double(gameProcessor.currentMonster.maxHp)).tint(Color.red)
             
             Rectangle().fill(Color.black).frame(width: 100, height: 100)
             
@@ -73,7 +73,7 @@ struct ContentView: View {
     }
     
     var talkView: some View {
-        Text(gameProcessor.currentTalk?.value ?? "")
+        Text(gameProcessor.currentTalk.value)
     }
     
     var heroView: some View {

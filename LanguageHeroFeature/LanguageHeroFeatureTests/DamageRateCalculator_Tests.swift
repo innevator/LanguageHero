@@ -18,7 +18,7 @@ final class DamageRateCalculator_Tests: XCTestCase {
     func test_increaseDamageRateToMaxWithHighCorrectInput() {
         let sut = DamageRateCalculator()
         let input = ""
-        let talk = Talk(value: "")
+        let talk = Talk(value: input)
         
         let rate = sut.calculate(input: input, talk: talk)
         
@@ -28,7 +28,7 @@ final class DamageRateCalculator_Tests: XCTestCase {
     func test_keepIncreaseDamageRate() {
         let sut = DamageRateCalculator()
         let input = ""
-        let talk = Talk(value: "")
+        let talk = Talk(value: input)
         
         let _ = sut.calculate(input: input, talk: talk)
         let rate2 = sut.calculate(input: input, talk: talk)

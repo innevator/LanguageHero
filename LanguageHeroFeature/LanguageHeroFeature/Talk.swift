@@ -10,7 +10,7 @@ import Foundation
 public struct Talk: Equatable {
     public let value: String
     
-    public init(value: String) {
+    public init(value: String = "") {
         self.value = value
     }
     
