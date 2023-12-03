@@ -12,7 +12,8 @@ let talks: [String] = ["fireball", "thunder"]
 let defaultTalks: [Talk] = talks.map { Talk(value: $0) }
 
 struct ContentView: View {
-    @StateObject var gameProcessor = GameProcessor(talks: defaultTalks, hero: Hero(), monsters: [Monster(), Monster()])
+    @Environment (\.scenePhase) private var scenePhase
+    @StateObject var gameProcessor = GameProcessor(talks: defaultTalks, hero: Hero(), monsters: [Monster(countDownAttackSecond: 2), Monster()])
     @State var currentSeconds: Int = 0
     @State var updateRate: Int = 0
     
@@ -20,31 +21,38 @@ struct ContentView: View {
     let fpsTimer = Timer.publish(every: 1/60, on: .main, in: .common).autoconnect()
     
     var body: some View {
-        VStack {
-            Text("\(updateRate)").hidden()
-            Text("時間: \(currentSeconds)")
-            Text("分數: \(gameProcessor.score)")
-            
-            if gameProcessor.gameStatus != .playing {
-                Spacer()
-                
-                resultView
-            }
-            else {
-                monsterView
-                
-                Spacer()
-                
-                talkView
-                
-                Spacer()
-                
-                heroView
+        ZStack {
+            if gameProcessor.gameStatus == .pause {
+                pauseView.zIndex(2)
             }
             
-            Spacer()
+            VStack {
+                Text("\(updateRate)").hidden()
+                Text("時間: \(currentSeconds)")
+                Text("分數: \(gameProcessor.score)")
+                
+                if gameProcessor.gameStatus == .win || gameProcessor.gameStatus == .lose {
+                    Spacer()
+                    
+                    resultView
+                }
+                else {
+                    monsterView
+                    
+                    Spacer()
+                    
+                    talkView
+                    
+                    Spacer()
+                    
+                    heroView
+                }
+                
+                Spacer()
+            }
+            .padding()
+            .zIndex(1)
         }
-        .padding()
         .onAppear {
             gameProcessor.start()
         }
@@ -55,6 +63,11 @@ struct ContentView: View {
         }
         .onReceive(fpsTimer) { _ in
             updateRate += 1
+        }
+        .onChange(of: scenePhase) { _, newPhase in
+            if newPhase == .inactive {
+                gameProcessor.pause()
+            }
         }
     }
     
@@ -99,6 +112,18 @@ struct ContentView: View {
                     gameProcessor.execute(input: defaultTalks[1].value)
                 }
             }
+        }
+    }
+    
+    var pauseView: some View {
+        ZStack {
+            Button("resume") {
+                gameProcessor.resume()
+            }
+            .zIndex(2)
+            Color(UIColor(white: 0, alpha: 0.8))
+                .ignoresSafeArea()
+                .zIndex(1)
         }
     }
 }
