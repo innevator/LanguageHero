@@ -18,6 +18,7 @@
 		FE031F262B17904F0070BF14 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE031F252B17904F0070BF14 /* Preview Assets.xcassets */; };
 		FE031F2B2B1790620070BF14 /* LanguageHeroFeature.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE031E8E2B16EDF30070BF14 /* LanguageHeroFeature.framework */; };
 		FE031F2C2B1790620070BF14 /* LanguageHeroFeature.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FE031E8E2B16EDF30070BF14 /* LanguageHeroFeature.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FE15A8762B20DFA40051B0B5 /* Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE15A8752B20DFA40051B0B5 /* Input.swift */; };
 		FE3B67032B1A4993000E37C2 /* LanguageHeroAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3B67022B1A4993000E37C2 /* LanguageHeroAppTests.swift */; };
 		FE3B670B2B1A5C88000E37C2 /* Monster_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3B670A2B1A5C88000E37C2 /* Monster_Tests.swift */; };
 		FE6334EC2B19DC340096C3F6 /* DamageRateCalculator_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED66E7E2B19D7A2008DBC20 /* DamageRateCalculator_Tests.swift */; };
@@ -77,6 +78,7 @@
 		FE031F202B17904E0070BF14 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		FE031F222B17904F0070BF14 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FE031F252B17904F0070BF14 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		FE15A8752B20DFA40051B0B5 /* Input.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Input.swift; sourceTree = "<group>"; };
 		FE3B67002B1A4993000E37C2 /* LanguageHeroAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LanguageHeroAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE3B67022B1A4993000E37C2 /* LanguageHeroAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageHeroAppTests.swift; sourceTree = "<group>"; };
 		FE3B67092B1A49C5000E37C2 /* LanguageHeroApp.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = LanguageHeroApp.xctestplan; sourceTree = SOURCE_ROOT; };
@@ -156,6 +158,7 @@
 				FE6334ED2B1A26BA0096C3F6 /* DamageRateCalculator.swift */,
 				FE6334F12B1A2F430096C3F6 /* Hero.swift */,
 				FE6334F32B1A363A0096C3F6 /* Monster.swift */,
+				FE15A8752B20DFA40051B0B5 /* Input.swift */,
 			);
 			path = LanguageHeroFeature;
 			sourceTree = "<group>";
@@ -380,6 +383,7 @@
 			files = (
 				FE6334F42B1A363A0096C3F6 /* Monster.swift in Sources */,
 				FE031EA72B1786810070BF14 /* GameProcessor.swift in Sources */,
+				FE15A8762B20DFA40051B0B5 /* Input.swift in Sources */,
 				FE031EA92B1786940070BF14 /* Talk.swift in Sources */,
 				FE6334EE2B1A26BA0096C3F6 /* DamageRateCalculator.swift in Sources */,
 				FE6334F22B1A2F430096C3F6 /* Hero.swift in Sources */,
