@@ -53,8 +53,8 @@ public final class GameProcessor {
         if monsters.count == 0 { return Monster() }
         return monsters.count > currentMonsterIndex ? monsters[currentMonsterIndex] : monsters[currentMonsterIndex - 1]
     }
-    public private(set) var monsterAttackCountDownTimer: Timer?
-    private var monsterAttackCountDownTimerPauseFireInterval: TimeInterval?
+    public private(set) var countDownTimer: Timer?
+    private var countDownTimerPauseFireInterval: TimeInterval?
     
     
     // MARK: - Initiailizer
@@ -98,21 +98,21 @@ public final class GameProcessor {
 
 extension GameProcessor {
     public func start() {
-        startMonsterAttackCountDown()
+        startCountDown()
     }
     
     private func stop() {
-        stopMonsterAttackCountDown()
+        stopCountDown()
     }
     
     public func pause() {
-        monsterAttackCountDownTimerPauseFireInterval = monsterAttackCountDownTimer?.fireDate.timeIntervalSinceNow
+        countDownTimerPauseFireInterval = countDownTimer?.fireDate.timeIntervalSinceNow
         gameStatus = .pause
     }
     
     public func resume() {
         gameStatus = .playing
-        monsterAttackCountDownTimerPauseFireInterval = nil
+        countDownTimerPauseFireInterval = nil
     }
     
     public func restart() {
@@ -130,21 +130,21 @@ extension GameProcessor {
 // MARK: - MonsterTimer
 
 extension GameProcessor {
-    private func startMonsterAttackCountDown() {
-        let timer = Timer(fire: Date(timeIntervalSinceNow: monsterAttackCountDownTimerPauseFireInterval ?? currentMonster.countDownAttackSeconds), interval: currentMonster.countDownAttackSeconds, repeats: true) {[weak self] _ in
+    private func startCountDown() {
+        let timer = Timer(fire: Date(timeIntervalSinceNow: countDownTimerPauseFireInterval ?? currentMonster.countDownAttackSeconds), interval: currentMonster.countDownAttackSeconds, repeats: true) {[weak self] _ in
             guard let self = self else { return }
             self.currentMonster.attack(self.hero) { [weak self] in
                 self?.gameStatus = .lose
             }
         }
-        self.monsterAttackCountDownTimer = timer
+        self.countDownTimer = timer
         RunLoop.current.add(timer, forMode: .common)
     }
     
-    private func stopMonsterAttackCountDown() {
-        if monsterAttackCountDownTimer?.isValid == true {
-            monsterAttackCountDownTimer?.invalidate()
-            monsterAttackCountDownTimer = nil
+    private func stopCountDown() {
+        if countDownTimer?.isValid == true {
+            countDownTimer?.invalidate()
+            countDownTimer = nil
         }
     }
 }

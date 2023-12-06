@@ -15,7 +15,7 @@ final class LanguageHeroFeatureTests: XCTestCase {
         XCTAssertEqual(sut.score, 0)
         XCTAssertEqual(sut.talks.count, 0)
         XCTAssertEqual(sut.currentTalk, Talk())
-        XCTAssertEqual(sut.monsterAttackCountDownTimer, nil)
+        XCTAssertEqual(sut.countDownTimer, nil)
         XCTAssertEqual(sut.gameStatus, .playing)
     }
     
@@ -72,7 +72,7 @@ final class LanguageHeroFeatureTests: XCTestCase {
         sut.execute(input: talk2) // 15 * 4
         
         XCTAssertEqual(sut.gameStatus, .win)
-        XCTAssertEqual(sut.monsterAttackCountDownTimer, nil)
+        XCTAssertEqual(sut.countDownTimer, nil)
     }
     
     func test_winGameAndRestartPlay() {
