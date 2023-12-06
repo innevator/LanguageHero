@@ -68,9 +68,9 @@ public final class GameProcessor {
     
     // MARK: - Functions
     
-    public func execute(input: String) {
+    public func execute(input: any Input) {
         if gameStatus == .playing {
-            let damageRate = damageCalculator.calculate(input: input, talk: currentTalk)
+            let damageRate = damageCalculator.calculate(input: input.value, talk: currentTalk)
             let damage = Int(damageRate * Double(hero.attack))
             hero.attack(currentMonster, damage: damage) { [weak self] in
                 guard let hp = self?.monsters.last?.hp else { return }

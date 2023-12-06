@@ -20,45 +20,39 @@ final class LanguageHeroFeatureTests: XCTestCase {
     }
     
     func test_score() {
-        let input = "some input"
-        let talk = Talk(value: input)
+        let talk = Talk(value: "some input")
         let sut = makeSUT(talks: [talk])
         
-        sut.execute(input: input)
+        sut.execute(input: talk)
         
         XCTAssertEqual(sut.score > 0, true)
     }
     
     func test_changeToNextTalk() {
-        let input1 = "input1"
-        let input2 = "input2"
-        let input3 = "input3"
-        let talk1 = Talk(value: input1)
-        let talk2 = Talk(value: input2)
-        let talk3 = Talk(value: input3)
+        let talk1 = Talk(value: "input1")
+        let talk2 = Talk(value: "input2")
+        let talk3 = Talk(value: "input3")
         
         let sut = makeSUT(talks: [talk1, talk2, talk3])
         
-        sut.execute(input: input1)
+        sut.execute(input: talk1)
         
         XCTAssertEqual(sut.currentTalk, talk2)
         
-        sut.execute(input: input2)
+        sut.execute(input: talk2)
         
         XCTAssertEqual(sut.currentTalk, talk3)
     }
     
     func test_processNoEnoughTalksWontGameOverOrCrash_stillCanScore() {
-        let input1 = "input1"
-        let input2 = "input2"
-        let talk1 = Talk(value: input1)
-        let talk2 = Talk(value: input2)
+        let talk1 = Talk(value: "input1")
+        let talk2 = Talk(value: "input2")
         let heroAttack = 15
         let sut = makeSUT(talks: [talk1, talk2], hero: Hero(attack: heroAttack), monsters: [Monster(hp: 2000)])
         
-        sut.execute(input: input1) // 15 * 2
-        sut.execute(input: input2) // 15 * 4
-        sut.execute(input: input2) // 15 * 8
+        sut.execute(input: talk1) // 15 * 2
+        sut.execute(input: talk2) // 15 * 4
+        sut.execute(input: talk2) // 15 * 8
         
         XCTAssertEqual(sut.currentTalk, talk2)
         XCTAssertEqual(sut.gameStatus, .playing)
@@ -66,32 +60,28 @@ final class LanguageHeroFeatureTests: XCTestCase {
     }
     
     func test_winGame() {
-        let input1 = "input1"
-        let input2 = "input2"
-        let talk1 = Talk(value: input1)
-        let talk2 = Talk(value: input2)
+        let talk1 = Talk(value: "input1")
+        let talk2 = Talk(value: "input2")
         let attack = 15
         let sut = makeSUT(talks: [talk1, talk2], hero: Hero(attack: attack), monsters: [Monster(hp: attack * 6)])
         
-        sut.execute(input: input1) // 15 * 2
+        sut.execute(input: talk1) // 15 * 2
         
         XCTAssertEqual(sut.gameStatus, .playing)
         
-        sut.execute(input: input2) // 15 * 4
+        sut.execute(input: talk2) // 15 * 4
         
         XCTAssertEqual(sut.gameStatus, .win)
         XCTAssertEqual(sut.monsterAttackCountDownTimer, nil)
     }
     
     func test_winGameAndRestartPlay() {
-        let input1 = "input1"
-        let input2 = "input2"
-        let talk1 = Talk(value: input1)
-        let talk2 = Talk(value: input2)
+        let talk1 = Talk(value: "input1")
+        let talk2 = Talk(value: "input2")
         let heroAttack = 30
         let sut = makeSUT(talks: [talk1, talk2], hero: Hero(attack: heroAttack), monsters:  [Monster(hp: heroAttack * 2)])
         
-        sut.execute(input: input1) // 30 * 2
+        sut.execute(input: talk1) // 30 * 2
         
         XCTAssertEqual(sut.gameStatus, .win)
         XCTAssertEqual(sut.currentMonster.hp, 0)
@@ -104,16 +94,14 @@ final class LanguageHeroFeatureTests: XCTestCase {
         XCTAssertEqual(sut.score, 0)
         XCTAssertEqual(sut.currentTalk.value, talk1.value)
         
-        sut.execute(input: input1) // 30 * 2
+        sut.execute(input: talk1) // 30 * 2
         
         XCTAssertEqual(sut.score, heroAttack * 2)
     }
     
     func test_MonsterAttackCountDown() {
-        let input1 = "input1"
-        let input2 = "input2"
-        let talk1 = Talk(value: input1)
-        let talk2 = Talk(value: input2)
+        let talk1 = Talk(value: "input1")
+        let talk2 = Talk(value: "input2")
         let hero = Hero(hp: 100)
         let countDownAttackSeconds: TimeInterval = 0.02
         let monster = Monster(hp: 30, attack: 20, countDownAttackSeconds: countDownAttackSeconds)
@@ -150,36 +138,38 @@ final class LanguageHeroFeatureTests: XCTestCase {
     }
     
     func test_winGameWhenKillAllMonsters() {
+        let talk = Talk()
         let damage = 20
         let hero = Hero(attack: damage)
         let monsters = getMonsters(count: 3, hp: damage)
-        let sut = makeSUT(talks: [Talk()], hero: hero, monsters: monsters)
+        let sut = makeSUT(talks: [talk], hero: hero, monsters: monsters)
         
         XCTAssertEqual(sut.currentMonster, monsters[0])
         
-        sut.execute(input: "")
+        sut.execute(input: talk)
         
         XCTAssertEqual(sut.gameStatus, .playing)
         XCTAssertEqual(sut.currentMonster, monsters[1])
         
-        sut.execute(input: "")
+        sut.execute(input: talk)
         
         XCTAssertEqual(sut.gameStatus, .playing)
         XCTAssertEqual(sut.currentMonster, monsters[2])
         
-        sut.execute(input: "")
+        sut.execute(input: talk)
         
         XCTAssertEqual(sut.gameStatus, .win)
     }
     
     func test_winGameAndRestartShouldResetToFirstOneMonster() {
+        let talk = Talk()
         let damage = 20
         let hero = Hero(attack: damage)
         let monsters = getMonsters(count: 2, hp: damage)
-        let sut = makeSUT(talks: [Talk()], hero: hero, monsters: monsters)
+        let sut = makeSUT(talks: [talk], hero: hero, monsters: monsters)
         
-        sut.execute(input: "")
-        sut.execute(input: "")
+        sut.execute(input: talk)
+        sut.execute(input: talk)
         sut.restart()
         
         XCTAssertEqual(sut.currentMonster, monsters[0])

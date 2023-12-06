@@ -106,10 +106,10 @@ struct ContentView: View {
             
             HStack {
                 Button("action1") {
-                    gameProcessor.execute(input: defaultTalks[0].value)
+                    gameProcessor.execute(input: defaultTalks[0])
                 }
                 Button("action2") {
-                    gameProcessor.execute(input: defaultTalks[1].value)
+                    gameProcessor.execute(input: defaultTalks[1])
                 }
             }
         }
